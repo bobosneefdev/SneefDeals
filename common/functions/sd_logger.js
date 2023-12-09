@@ -1,4 +1,4 @@
-import { getTime } from "./sdUtility.js";
+import { getTime } from "./sd_utility.js";
 
 export function sdLogger(message) {
     const line = 

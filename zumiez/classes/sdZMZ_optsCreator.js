@@ -2,11 +2,13 @@ import * as filterRef from "../objects/sdZMZ_filters.js";
 
 export class optsCreator {
     constructor(
-        category, // Desired category obj (Found in the sdZMZ_categories.js file)
-        filtersObj // Desired filters (Created via the filtersCreator class)
+        categoryObj, // Desired category obj (Found in the sdZMZ_categories.js file)
+        filtersObj, // Desired filters (Created via the filtersCreator class)
+        pageNum, // Page number to query (EX: 1)
     ) {
-        this.category = category;
+        this.category = categoryObj;
         this.filters = filtersObj;
+        this.page = pageNum;
     }
 }
 

@@ -10,6 +10,17 @@ export const sale = {
     true: "Sale"
 }
 
+export const size = {
+    paramName: "size",
+    xXXLarge: "XXXL",
+    xXLarge: "XXL",
+    xLarge: "XL",
+    large: "L",
+    medium: "M",
+    small: "S",
+    xSmall: "XS"
+}
+
 export const brands = {
     paramName: "brand",
 }

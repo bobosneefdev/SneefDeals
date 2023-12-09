@@ -128,3 +128,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Discord webhook keys
+common/objects/sd_webhookLinks.js
+
+#temp JSON storage
+zumiez/data

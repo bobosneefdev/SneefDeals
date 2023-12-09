@@ -1,28 +1,48 @@
 import axios from "axios";
-import { sdLogger } from "../../common/sdLogger.js";
+import { sdLogger } from "../../common/functions/sd_logger.js";
+import * as sdUtils from "../../common/functions/sd_utility.js";
 
 export async function fetchItems(options) {
     if (!options.category) {
-        sdLogger(`No category found with that name.`);
+        sdLogger(`fetchItems: Please provide a category.`);
         return false;
     }
 
-    const data = getData(options)
-    if (!data) {
+    if (!options.filters) {
+        sdLogger(`fetchItems: Please provide a filter.`);
         return false;
     }
 
-    const rawResponse = await axios.post(
-        reqUrl,
-        data,
-        headers
-    );
-    const itemArr = rawResponse.data.content.product.value;
-    console.log(JSON.stringify(itemArr[0]));
-    return itemArr;
+    const payload = getPayload(options)
+    if (!payload) {
+        return false;
+    }
+
+    let itemDatas = [];
+    while (!itemDatas.length) {
+        try {
+            const response = await axios.post(
+                reqUrl,
+                payload,
+                headers
+            );
+            const responseItemDatas = response.data.content.product.value;
+            if (
+                response.status == 200 &&
+                Array.isArray(responseItemDatas)
+            ) {
+                itemDatas = responseItemDatas;
+            } else {
+                await sdUtils.randomTimeoutMs(90000, 120000);
+            }
+        } catch (error) {
+            await sdUtils.randomTimeoutMs(90000, 120000);
+        }
+    }
+    return itemDatas;
 }
 
-function getData(options) {
+function getPayload(options) {
     try {
         let dataObject = {
             data: {
@@ -38,7 +58,7 @@ function getData(options) {
                     store: {},
                 },
                 n_item: 100,
-                page_number: 1,
+                page_number: options.page,
                 sort: {
                     choices: true,
                 },
@@ -112,7 +132,6 @@ function getData(options) {
         if (Object.keys(filter).length) {
             dataObject.data.filter = filter;
         }
-        console.log(JSON.stringify(filter))
 
         return dataObject;
     } catch (error) {
