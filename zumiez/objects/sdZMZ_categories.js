@@ -1,3 +1,5 @@
+import { filtersCreator } from "../classes/sdZMZ_filtersCreator.js";
+
 export const categories = {
     mens: {
         tops: {
@@ -56,6 +58,11 @@ export const categories = {
         snow: {
             uri: "/mens/snow.html",
             channelKey: "mens_snow",
+        },
+        shoes: {
+            customFilters: new filtersCreator()
+
+            
         },
         uri: "/mens.html",
     },

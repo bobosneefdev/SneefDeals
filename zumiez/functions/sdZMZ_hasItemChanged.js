@@ -1,6 +1,6 @@
 import { sdLogger } from "../../common/functions/sd_logger.js";
 
-export function evalItemChange(oldItem, newItem) {
+export function hasItemChanged(oldItem, newItem) {
     try {
         // IF NO CHANGES
         if (oldItem == newItem) {
@@ -43,7 +43,7 @@ export function evalItemChange(oldItem, newItem) {
             return `PROMO PRICE NOW ~$${newItem.promoPrice}, WAS ~$${oldItem.promoPrice}!`;
         }
     } catch (error) {
-        sdLogger(`evalItemChange: ${error}`);
+        sdLogger(`hasItemChanged: ${error}`);
         return false;
     }
 }
