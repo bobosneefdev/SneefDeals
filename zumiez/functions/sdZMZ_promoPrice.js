@@ -6,7 +6,7 @@ export function getPromoPrice(price, promoString) {
             continue;
         }
         if (promo.ratio) {
-            return `${price * promo.ratio}`;
+            return +(price * promo.ratio).toFixed(2);
         }
         if (promo.ppu) {
             return promo.ppu;

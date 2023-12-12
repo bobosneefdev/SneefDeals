@@ -1,6 +1,7 @@
 import axios from "axios";
 import { sdLogger } from "../../common/functions/sd_logger.js";
 import * as sdUtils from "../../common/functions/sd_utility.js";
+import * as settings from "../sdZMZ_userSettings.js";
 
 export async function fetchItems(options) {
     if (!options.category) {
@@ -18,24 +19,36 @@ export async function fetchItems(options) {
         return false;
     }
 
+    let tries = 0;
     let itemDatas = [];
-    while (!itemDatas.length) {
+    while (!itemDatas.length && tries < settings.maxRequestAttempts) {
         try {
+            tries++
+            sdLogger(`TRY ${tries}: Sending request to ${options.category.uri}`);
             const response = await axios.post(
                 reqUrl,
                 payload,
                 headers
             );
-            const responseItemDatas = response.data.content.product.value;
-            if (
-                response.status == 200 &&
-                Array.isArray(responseItemDatas)
+            if (response.status != 200) {
+                await sdUtils.randomTimeoutMs(180000, 240000);
+                continue;
+            } else if (
+                !response.data ||
+                !response.data.content ||
+                !response.data.content.product ||
+                !response.data.content.product.value
             ) {
+                return [];
+            }
+            const responseItemDatas = response.data.content.product.value;
+            if (Array.isArray(responseItemDatas)) {
                 itemDatas = responseItemDatas;
             } else {
-                await sdUtils.randomTimeoutMs(90000, 120000);
+                return [];
             }
         } catch (error) {
+            console.log(error);
             await sdUtils.randomTimeoutMs(90000, 120000);
         }
     }

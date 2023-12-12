@@ -17,7 +17,7 @@ export class filtersCreator {
         if (colorsArr.length) {
             this[filterRef.colors.paramName] = standardObject(colorsArr);
         }
-        if (saleBool.length) {
+        if (saleBool) {
             this[filterRef.sale.paramName] = standardObject([
                 filterRef.sale.true,
             ]);

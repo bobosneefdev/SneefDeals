@@ -9,11 +9,11 @@ export class zmzItem {
             )
         }
         this.id = item.id;
-        this.regPrice = item.final_price;
+        this.regPrice = +item.final_price;
         this.brand = item.brand;
         this.name = item.name;
         this.img = item.image_url;
         this.url = `https://zumiez.com${item.product_url}`;
-        this.msrp = item.price;
+        this.msrp = +item.price;
     }
 }

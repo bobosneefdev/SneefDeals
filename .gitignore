@@ -129,8 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# Discord webhook keys
-common/objects/sd_webhookLinks.js
+# Shhhhhhhhh
+common/secrets
 
 #temp JSON storage
 zumiez/data
