@@ -1,24 +1,28 @@
 import { categories } from "./objects/sdZMZ_categories.js";
 
+export const zmzWebhookConfig = {
+    color: 15258703,
+    postRetryDelayMs: 10000,
+    mainPostDelayMs: 750,
+};
+
 // Min/Max possible wait times between requests (ms)
-export const minMsBetweenReqs = 20000;
-export const maxMsBetweenReqs = 30000;
+export const minMsBetweenReqs = 15000;
+export const maxMsBetweenReqs = 20000;
 
 // Max retries on a given request
 export const maxRequestAttempts = 3;
 
 // File path to store the scraped item data.
-export const jsonFilePath = "./zumiez/data/sdZMZ_itemsData.json";
+export const jsonFilePath = "./zumiez/data/sdZMZ_item_data.json";
 
 export const reqFilters = {
-    saleItems: true,
-    brands: [],
-    colors: [],
-    priceRange: [],
-    bodyTypes: []
-}
-// Query for only sale items (Default: true, Type: Boolean)
-export const saleItems = true;
+    saleItems: false, // Only sale items?
+    brands: [], // List of brands
+    colors: [], // List of Colors
+    priceRange: [], // [MinUsd, MaxUsd]
+    bodyTypes: [], // List of body types (Men's, Women's, Children's)
+};
 
 // Items to fetch per request (Default: 100, Max: 100)
 export const itemsPerReq = 100;
@@ -80,5 +84,9 @@ export const categoriesToScrape = [
     categories.other.accessories.jewelry.mens,
     categories.other.accessories.backpacks,
     categories.other.accessories.bags,
-    categories.other.accessories.wallets
-]
+    categories.other.accessories.wallets,
+];
+
+// export const categoriesToScrape = [
+//     categories.other.accessories.watches
+// ]

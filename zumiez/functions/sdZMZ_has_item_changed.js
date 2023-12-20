@@ -9,13 +9,10 @@ export function hasItemChanged(oldItem, newItem) {
 
         // BRAND NEW ITEM
         if (!oldItem && newItem) {
-            if (
-                newItem.promoPrice &&
-                newItem.promoPrice < newItem.regPrice
-            ) {
-                return `PUT ON PROMO FOR ~$${newItem.promoPrice}!`;
+            if (newItem.promoPrice && newItem.promoPrice < newItem.regPrice) {
+                return `PUT ON PROMO!`;
             }
-            return `PUT ON SALE FOR $${newItem.regPrice}!`;
+            return `PUT ON SALE!`;
         }
 
         // BASE PRICE LOWERED
@@ -23,7 +20,7 @@ export function hasItemChanged(oldItem, newItem) {
             oldItem.regPrice > newItem.regPrice &&
             newItem.regPrice < newItem.promoPrice
         ) {
-            return `BASE PRICE NOW $${newItem.regPrice}, WAS $${oldItem.regPrice}!`;
+            return `STANDARD PRICE LOWERED!`;
         }
 
         // ALREADY ON SALE ITEM PUT ON PROMO
@@ -32,7 +29,7 @@ export function hasItemChanged(oldItem, newItem) {
             newItem.promoPrice &&
             newItem.promoPrice < newItem.regPrice
         ) {
-            return `PUT ON PROMO FOR ~$${newItem.promoPrice}`;
+            return `WAS ON SALE, NOW ALSO ON PROMO!`;
         }
 
         // PRE-EXISTING PROMO PRICE LOWERED
@@ -40,7 +37,7 @@ export function hasItemChanged(oldItem, newItem) {
             oldItem.promoPrice > newItem.promoPrice &&
             newItem.promoPrice < newItem.regPrice
         ) {
-            return `PROMO PRICE NOW ~$${newItem.promoPrice}, WAS ~$${oldItem.promoPrice}!`;
+            return `PROMO PRICE LOWERED!`;
         }
     } catch (error) {
         sdLogger(`hasItemChanged: ${error}`);

@@ -1,9 +1,8 @@
 import { getTime } from "./sd_utility.js";
 
-export function sdLogger(message) {
-    const line = 
-    '------------------------------------------------------------------------------------------------------------------------';
-    const timeStamp = getTime()
-    console.log(line);
-    console.log(`[${timeStamp}] : ${message}`);
+export function sdLogger(message, dividerStr = null) {
+    if (dividerStr != null) {
+        console.log(`${dividerStr}`);
+    }
+    console.log(`[${getTime()}] : ${message}`);
 }

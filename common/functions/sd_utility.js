@@ -10,8 +10,15 @@ export function getTime() {
     });
 }
 
+export function getDate() {
+    const now = new Date();
+    return now.toLocaleDateString("en-US", {
+        dateStyle: "medium",
+    });
+}
+
 export async function timeout(ms) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
 }

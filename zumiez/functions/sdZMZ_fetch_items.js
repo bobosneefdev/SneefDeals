@@ -1,7 +1,7 @@
 import axios from "axios";
 import { sdLogger } from "../../common/functions/sd_logger.js";
 import * as sdUtils from "../../common/functions/sd_utility.js";
-import * as settings from "../sdZMZ_userSettings.js";
+import * as settings from "../sdZMZ_user_settings.js";
 
 export async function fetchItems(options) {
     if (!options.category) {
@@ -14,50 +14,52 @@ export async function fetchItems(options) {
         return false;
     }
 
-    const payload = getPayload(options)
-    if (!payload) {
+    const payloadObj = getPayload(options);
+    if (!payloadObj) {
         return false;
     }
 
-    let tries = 0;
-    let itemDatas = [];
-    while (!itemDatas.length && tries < settings.maxRequestAttempts) {
+    let attempts = 1;
+    for (let i = 1; i <= settings.maxRequestAttempts; i++) {
         try {
-            tries++
-            sdLogger(`TRY ${tries}: Sending request to ${options.category.uri}`);
-            const response = await axios.post(
-                reqUrl,
-                payload,
-                headers
+            sdLogger(
+                `REQUEST ATTEMPT #${attempts} FOR PAGE ${options.page}`,
+                " "
             );
-            if (response.status != 200) {
-                await sdUtils.randomTimeoutMs(180000, 240000);
-                continue;
-            } else if (
+            const response = await axios.post(reqUrl, payloadObj, headers);
+            if (payloadObj.data.filter) {
+                sdLogger(`Request Filters:`);
+                sdLogger(`${JSON.stringify(options.filters)}`);
+            }
+
+            if (
+                response.status != 200 ||
                 !response.data ||
                 !response.data.content ||
                 !response.data.content.product ||
-                !response.data.content.product.value
+                !response.data.content.product.value ||
+                !Array.isArray(response.data.content.product.value)
             ) {
+                await sdUtils.randomTimeoutMs(180000, 240000);
+                attempts++;
+                continue;
+            }
+
+            const itemDatas = response.data.content.product.value;
+            if (!itemDatas.length) {
                 return [];
             }
-            const responseItemDatas = response.data.content.product.value;
-            if (Array.isArray(responseItemDatas)) {
-                itemDatas = responseItemDatas;
-            } else {
-                return [];
-            }
+            return itemDatas;
         } catch (error) {
-            console.log(error);
+            sdLogger(`fetchItems: ${error}`);
             await sdUtils.randomTimeoutMs(90000, 120000);
         }
     }
-    return itemDatas;
 }
 
 function getPayload(options) {
     try {
-        let dataObject = {
+        let payloadObj = {
             data: {
                 context: {
                     page: {
@@ -70,7 +72,7 @@ function getPayload(options) {
                     },
                     store: {},
                 },
-                n_item: 100,
+                n_item: options.maxItems,
                 page_number: options.page,
                 sort: {
                     choices: true,
@@ -141,12 +143,11 @@ function getPayload(options) {
             },
         };
 
-        const filter = options.filters
-        if (Object.keys(filter).length) {
-            dataObject.data.filter = filter;
+        if (Object.keys(options.filters).length) {
+            payloadObj.data.filter = options.filters;
         }
 
-        return dataObject;
+        return payloadObj;
     } catch (error) {
         sdLogger(`getData: ${error}`);
         return false;
@@ -162,4 +163,4 @@ const headers = {
         "accept-language": "en-US,en;q=0.8",
         "content-type": "application/json",
     },
-}
+};

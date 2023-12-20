@@ -133,4 +133,4 @@ dist
 common/secrets
 
 #temp JSON storage
-zumiez/data
+zumiez/data/*

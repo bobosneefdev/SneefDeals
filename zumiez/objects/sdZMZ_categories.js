@@ -1,5 +1,3 @@
-import { filtersCreator } from "../classes/sdZMZ_filtersCreator.js";
-import { reqFilters } from "../sdZMZ_userSettings.js";
 import * as filterRef from "./sdZMZ_filters.js";
 import { webhookUrls } from "../../common/secrets/sd_webhookLinks.js";
 
@@ -8,23 +6,23 @@ export const categories = {
         tops: {
             tShirts: {
                 uri: "/mens/tops/t-shirts.html",
-                webhookUrl: webhookUrls.zumiez.mens.tops.tShirts
+                webhookUrl: webhookUrls.zumiez.mens.tops.tShirts,
             },
             hoodies: {
                 uri: "/mens/tops/hoodies.html",
-                webhookUrl: webhookUrls.zumiez.mens.tops.hoodies
+                webhookUrl: webhookUrls.zumiez.mens.tops.hoodies,
             },
             shirts: {
                 uri: "/mens/tops/shirts.html",
-                webhookUrl: webhookUrls.zumiez.mens.tops.shirts
+                webhookUrl: webhookUrls.zumiez.mens.tops.shirts,
             },
             sweaters: {
                 uri: "/mens/tops/sweaters.html",
-                webhookUrl: webhookUrls.zumiez.mens.tops.sweaters
+                webhookUrl: webhookUrls.zumiez.mens.tops.sweaters,
             },
             tankTops: {
                 uri: "/mens/tops/tank-tops.html",
-                webhookUrl: webhookUrls.zumiez.mens.tops.tankTops
+                webhookUrl: webhookUrls.zumiez.mens.tops.tankTops,
             },
             jackets: {
                 uri: "/mens/outerwear/jackets.html",
@@ -38,128 +36,128 @@ export const categories = {
         bottoms: {
             shorts: {
                 uri: "/mens/bottoms/shorts.html",
-                webhookUrl: webhookUrls.zumiez.mens.bottoms.shorts
+                webhookUrl: webhookUrls.zumiez.mens.bottoms.shorts,
             },
             pants: {
                 uri: "/mens/bottoms/pants.html",
-                webhookUrl: webhookUrls.zumiez.mens.bottoms.pants
+                webhookUrl: webhookUrls.zumiez.mens.bottoms.pants,
             },
             jeans: {
                 uri: "/mens/bottoms/jeans.html",
-                webhookUrl: webhookUrls.zumiez.mens.bottoms.jeans
+                webhookUrl: webhookUrls.zumiez.mens.bottoms.jeans,
             },
             overalls: {
                 uri: "/mens/bottoms/overalls.html",
-                webhookUrl: webhookUrls.zumiez.mens.bottoms.overalls
+                webhookUrl: webhookUrls.zumiez.mens.bottoms.overalls,
             },
         },
         underwear: {
             uri: "/accessories/underwear.html",
             webhookUrl: webhookUrls.zumiez.mens.underwear,
             filterOverwrite: {
-                bodyTypes: [filterRef.bodyTypes.mens]
-            }
+                bodyTypes: [filterRef.bodyTypes.mens],
+            },
         },
         footwear: {
             socks: {
                 uri: "/accessories/socks.html",
                 webhookUrl: webhookUrls.zumiez.womens.footwear.socks,
                 filterOverwrite: {
-                    bodyTypes: [filterRef.bodyTypes.mens]
-                }
+                    bodyTypes: [filterRef.bodyTypes.mens],
+                },
             },
             sneakers: {
                 uri: "/shoes/sneakers.html",
                 webhookUrl: webhookUrls.zumiez.mens.footwear.sneakers,
                 filterOverwrite: {
-                    bodyTypes: [filterRef.bodyTypes.mens]
-                }
+                    bodyTypes: [filterRef.bodyTypes.mens],
+                },
             },
-        }
+        },
     },
     womens: {
         tops: {
             tShirts: {
                 uri: "/womens/tops/t-shirts.html",
-                webhookUrl: webhookUrls.zumiez.womens.tops.tShirts
+                webhookUrl: webhookUrls.zumiez.womens.tops.tShirts,
             },
             cropTops: {
                 uri: "/womens/tops/crop-tops.html",
-                webhookUrl: webhookUrls.zumiez.womens.tops.cropTops
+                webhookUrl: webhookUrls.zumiez.womens.tops.cropTops,
             },
             hoodies: {
                 uri: "/womens/tops/womens-hoodies.html",
-                webhookUrl: webhookUrls.zumiez.womens.tops.hoodies
+                webhookUrl: webhookUrls.zumiez.womens.tops.hoodies,
             },
             shirts: {
                 uri: "/womens/tops/tops.html",
-                webhookUrl: webhookUrls.zumiez.womens.tops.shirts
+                webhookUrl: webhookUrls.zumiez.womens.tops.shirts,
             },
             tankTops: {
                 uri: "/womens/tops/tank-tops.html",
-                webhookUrl: webhookUrls.zumiez.womens.tops.tankTops
+                webhookUrl: webhookUrls.zumiez.womens.tops.tankTops,
             },
             sweaters: {
                 uri: "/womens/tops/sweaters.html",
-                webhookUrl: webhookUrls.zumiez.womens.tops.sweaters
+                webhookUrl: webhookUrls.zumiez.womens.tops.sweaters,
             },
             bodySuits: {
                 uri: "/womens/tops/bodysuits.html",
-                webhookUrl: webhookUrls.zumiez.womens.tops.bodySuits
+                webhookUrl: webhookUrls.zumiez.womens.tops.bodySuits,
             },
             jackets: {
                 uri: "/womens/outerwear/jackets.html",
-                webhookUrl: webhookUrls.zumiez.womens.tops.jackets
+                webhookUrl: webhookUrls.zumiez.womens.tops.jackets,
             },
             dresses: {
                 uri: "/womens/skirts-dresses/dresses.html",
-                webhookUrl: webhookUrls.zumiez.womens.tops.dresses
-            }
+                webhookUrl: webhookUrls.zumiez.womens.tops.dresses,
+            },
         },
         bottoms: {
             pants: {
                 uri: "/womens/bottoms/pants-and-leggings/pants.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.pants
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.pants,
             },
             sweatPants: {
                 uri: "/womens/bottoms/pants-and-leggings/sweatpants.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.sweatPants
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.sweatPants,
             },
             corduroyPants: {
                 uri: "/womens/bottoms/pants-and-leggings/corduroy-pants.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.pants
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.pants,
             },
             joggers: {
                 uri: "/womens/bottoms/pants-and-leggings/joggers.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.pants
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.pants,
             },
             overalls: {
                 uri: "/womens/bottoms/pants-and-leggings/overalls.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.overalls
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.overalls,
             },
             trackPants: {
                 uri: "/womens/bottoms/pants-and-leggings/track-pants.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.pants
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.pants,
             },
             leggings: {
                 uri: "/womens/bottoms/pants-and-leggings/leggings.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.leggings
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.leggings,
             },
             shorts: {
                 uri: "/womens/bottoms/shorts.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.shorts
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.shorts,
             },
             jeans: {
                 uri: "/womens/bottoms/jeans.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.jeans
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.jeans,
             },
             overalls2: {
                 uri: "/womens/bottoms/overalls.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.overalls
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.overalls,
             },
             skirts: {
                 uri: "/womens/skirts-dresses/skirts.html",
-                webhookUrl: webhookUrls.zumiez.womens.bottoms.skirts
+                webhookUrl: webhookUrls.zumiez.womens.bottoms.skirts,
             },
         },
         footwear: {
@@ -167,33 +165,33 @@ export const categories = {
                 uri: "/accessories/socks.html",
                 webhookUrl: webhookUrls.zumiez.womens.footwear.socks,
                 filterOverwrite: {
-                    bodyTypes: [filterRef.bodyTypes.womens]
-                }
+                    bodyTypes: [filterRef.bodyTypes.womens],
+                },
             },
             sneakers: {
                 uri: "/shoes/sneakers.html",
                 webhookUrl: webhookUrls.zumiez.womens.footwear.sneakers,
                 filterOverwrite: {
-                    bodyTypes: [filterRef.bodyTypes.womens]
-                }
-            }
+                    bodyTypes: [filterRef.bodyTypes.womens],
+                },
+            },
         },
         underwear: {
             bras: {
                 uri: "/womens/intimates/bras.html",
-                webhookUrl: webhookUrls.zumiez.womens.underwear.bras
+                webhookUrl: webhookUrls.zumiez.womens.underwear.bras,
             },
             underwear: {
                 uri: "/womens/intimates/undies.html",
-                webhookUrl: webhookUrls.zumiez.womens.underwear.underwear
-            }
-        }
+                webhookUrl: webhookUrls.zumiez.womens.underwear.underwear,
+            },
+        },
     },
     other: {
         snow: {
             womens: {
                 uri: "/womens/snow.html",
-                webhookUrl: webhookUrls.zumiez.other.snow.womens
+                webhookUrl: webhookUrls.zumiez.other.snow.womens,
             },
             mens: {
                 uri: "/mens/snow.html",
@@ -201,82 +199,84 @@ export const categories = {
             },
             snow: {
                 uri: "/snow.html",
-                webhookUrl: webhookUrls.zumiez.other.snow.snow
-            }
+                webhookUrl: webhookUrls.zumiez.other.snow.snow,
+            },
         },
         swimwear: {
             womens: {
                 uri: "/womens/swimwear.html",
-                webhookUrl: webhookUrls.zumiez.other.swimwear.womens
+                webhookUrl: webhookUrls.zumiez.other.swimwear.womens,
             },
             mens: {
                 uri: "/mens/bottoms/shorts/swim.html",
-                webhookUrl: webhookUrls.zumiez.other.swimwear.mens
-            }
+                webhookUrl: webhookUrls.zumiez.other.swimwear.mens,
+            },
         },
         skate: {
             completes: {
                 uri: "/skate/completes.html",
-                webhookUrl: webhookUrls.zumiez.other.skate.completes
+                webhookUrl: webhookUrls.zumiez.other.skate.completes,
             },
             decks: {
                 uri: "/skate/skateboard-decks.html",
-                webhookUrl: webhookUrls.zumiez.other.skate.decks
+                webhookUrl: webhookUrls.zumiez.other.skate.decks,
             },
             parts: {
                 uri: "/skate/components.html",
-                webhookUrl: webhookUrls.zumiez.other.skate.parts
+                webhookUrl: webhookUrls.zumiez.other.skate.parts,
             },
             hardware: {
                 uri: "/skate/skate-accessories.html",
-                webhookUrl: webhookUrls.zumiez.other.skate.parts
-            }
+                webhookUrl: webhookUrls.zumiez.other.skate.parts,
+            },
         },
         accessories: {
             beanies: {
                 uri: "/accessories/headwear/beanies.html",
-                webhookUrl: webhookUrls.zumiez.other.accessories.beanies
+                webhookUrl: webhookUrls.zumiez.other.accessories.beanies,
             },
             hats: {
                 uri: "/accessories/headwear/hats.html",
-                webhookUrl: webhookUrls.zumiez.other.accessories.hats
+                webhookUrl: webhookUrls.zumiez.other.accessories.hats,
             },
             belts: {
                 uri: "/accessories/belts.html",
-                webhookUrl: webhookUrls.zumiez.other.accessories.belts
+                webhookUrl: webhookUrls.zumiez.other.accessories.belts,
             },
             watches: {
                 uri: "/accessories/watches-jewelry/watches.html",
-                webhookUrl: webhookUrls.zumiez.other.accessories.watches
+                webhookUrl: webhookUrls.zumiez.other.accessories.watches,
             },
             jewelry: {
                 womens: {
                     uri: "/accessories/watches-jewelry/jewelry.html",
-                    webhookUrl: webhookUrls.zumiez.other.accessories.jewelry.womens,
+                    webhookUrl:
+                        webhookUrls.zumiez.other.accessories.jewelry.womens,
                     filterOverwrite: {
-                        bodyTypes: [filterRef.bodyTypes.womens]
-                    }
+                        bodyTypes: [filterRef.bodyTypes.womens],
+                    },
                 },
                 mens: {
                     uri: "/accessories/watches-jewelry/jewelry.html",
-                    webhookUrl: webhookUrls.zumiez.other.accessories.jewelry.mens,
+                    webhookUrl:
+                        webhookUrls.zumiez.other.accessories.jewelry.mens,
                     filterOverwrite: {
-                        bodyTypes: [filterRef.bodyTypes.mens]
-                    }
-                }
+                        bodyTypes: [filterRef.bodyTypes.mens],
+                    },
+                },
             },
             backpacks: {
                 uri: "/accessories/backpacks-bags/backpacks.html",
-                webhookUrl: webhookUrls.zumiez.other.accessories.bags
+                webhookUrl: webhookUrls.zumiez.other.accessories.bags,
             },
             bags: {
                 uri: "/accessories/backpacks-bags/bags.html",
-                webhookUrl: webhookUrls.zumiez.other.accessories.bags
+                webhookUrl: webhookUrls.zumiez.other.accessories.bags,
             },
             wallets: {
                 uri: "/accessories/backpacks-bags/wallets.html",
-                webhookUrl: webhookUrls.zumiez.other.accessories.wallets
-            }
-        }
-    }
-}
+                webhookUrl: webhookUrls.zumiez.other.accessories.wallets,
+            },
+        },
+    },
+};

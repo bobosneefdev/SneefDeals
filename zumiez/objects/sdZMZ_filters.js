@@ -2,13 +2,13 @@ export const bodyTypes = {
     paramName: "en.att_lifestage",
     kids: "Kids'",
     womens: "Women's",
-    mens: "Men's"
-}
+    mens: "Men's",
+};
 
 export const sale = {
     paramName: "promotion_flag",
-    true: "Sale"
-}
+    true: "Sale",
+};
 
 export const size = {
     paramName: "size",
@@ -18,12 +18,12 @@ export const size = {
     large: "L",
     medium: "M",
     small: "S",
-    xSmall: "XS"
-}
+    xSmall: "XS",
+};
 
 export const brands = {
     paramName: "brand",
-}
+};
 
 export const colors = {
     paramName: "color",
@@ -42,9 +42,9 @@ export const colors = {
     orange: "Orange",
     gold: "Gold",
     silver: "Silver",
-    rust: "Rust"
-}
+    rust: "Rust",
+};
 
 export const priceRange = {
-    paramName: "final_price"
-}
+    paramName: "final_price",
+};

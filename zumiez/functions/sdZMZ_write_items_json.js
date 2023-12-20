@@ -1,14 +1,15 @@
 import { promises as fs } from "fs";
 import { sdLogger } from "../../common/functions/sd_logger.js";
+import { jsonFilePath } from "../sdZMZ_user_settings.js";
 
 export async function writeItemsJson(data) {
     try {
         const dataString = JSON.stringify(data, null, 4);
-        await fs.writeFile('./zumiez/data/sdZMZ_itemsData.json', dataString, 'utf8');
-        sdLogger(`Successfully wrote items to JSON file.`)
+        await fs.writeFile(jsonFilePath, dataString, "utf8");
+        sdLogger(`Successfully wrote items to JSON file.`, true);
         return true;
     } catch (error) {
-        sdLogger(`writeItemsJson: ${error}`);
+        sdLogger(`writeItemsJson: ${error}`, true);
         return false;
     }
 }
