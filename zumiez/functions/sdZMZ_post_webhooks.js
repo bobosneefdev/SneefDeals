@@ -20,7 +20,6 @@ export async function postWebhook(
             howItChanged
         );
         embeds.push(embedOne);
-        console.log(`\n\nEMBEDS: ${JSON.stringify(embeds)}`);
 
         const webhook = new SneefWebhook(
             "SneefDeals",

@@ -2,6 +2,11 @@ import { sdLogger } from "../../common/functions/sd_logger.js";
 
 export function hasItemChanged(oldItem, newItem) {
     try {
+        // IF NO OLD ITEM
+        if (!oldItem) {
+            return false;
+        }
+
         // IF NO CHANGES
         if (oldItem == newItem) {
             return false;
