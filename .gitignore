@@ -130,7 +130,7 @@ dist
 .pnp.*
 
 # Shhhhhhhhh
-common/secrets
+common/secrets/*
 
 #temp JSON storage
 zumiez/data/*

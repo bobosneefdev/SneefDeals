@@ -32,11 +32,11 @@ function getLowestPromoPrice(oldData, newData) {
             oldData.lowestPromo &&
             oldData.lowestPromo.price < newData.promoPrice
         ) {
-            return oldData.lowestPromo;
+            return +oldData.lowestPromo;
         } else if (newData.promoPrice) {
             const date = getDate();
             return {
-                price: newData.promoPrice,
+                price: +newData.promoPrice,
                 date: date,
             };
         } else {
@@ -55,11 +55,11 @@ function getLowestRegPrice(oldData, newData) {
             oldData.lowestReg &&
             oldData.lowestReg.price < newData.regPrice
         ) {
-            return oldData.lowestReg;
+            return +oldData.lowestReg;
         } else {
             const date = getDate();
             return {
-                price: newData.regPrice,
+                price: +newData.regPrice,
                 date: date,
             };
         }

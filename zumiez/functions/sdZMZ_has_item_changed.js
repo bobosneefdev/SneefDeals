@@ -31,6 +31,8 @@ export function hasItemChanged(oldItem, newItem) {
 
         // PRE-EXISTING PROMO PRICE LOWERED
         if (
+            oldItem.promoPrice != null &&
+            newItem.promoPrice != null &&
             oldItem.promoPrice != newItem.promoPrice &&
             oldItem.promoPrice > newItem.promoPrice &&
             newItem.promoPrice < newItem.regPrice

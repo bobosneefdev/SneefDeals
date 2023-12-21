@@ -6,7 +6,7 @@ export async function alertMeDiscord(messageStr) {
     try {
         sdLogger(messageStr);
         await axios.post(
-            webhookUrls.alertMeDiscord,
+            webhookUrls.utility.alerts,
             {
                 content: messageStr,
             },
