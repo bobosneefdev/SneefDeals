@@ -4,12 +4,13 @@ import { sdLogger } from "../../common/functions/sd_logger.js";
 
 export class ZumiezItem {
     constructor(itemData, oldItemData) {
-        this.promoPrice = +itemData.final_price;
         if (itemData.promo_text && itemData.promo_text.length) {
             this.promoPrice = getPromoPrice(
                 itemData.final_price,
                 itemData.promo_text[0]
             );
+        } else {
+            this.promoPrice = null;
         }
 
         this.id = itemData.id;
@@ -32,12 +33,14 @@ function getLowestPromoPrice(oldData, newData) {
             oldData.lowestPromo.price < newData.promoPrice
         ) {
             return oldData.lowestPromo;
-        } else {
+        } else if (newData.promoPrice) {
             const date = getDate();
             return {
                 price: newData.promoPrice,
                 date: date,
             };
+        } else {
+            return null;
         }
     } catch (error) {
         sdLogger(`getLowestPromoPrice: ${error}`);

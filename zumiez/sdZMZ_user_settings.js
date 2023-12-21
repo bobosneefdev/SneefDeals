@@ -3,11 +3,11 @@ import { categories } from "./objects/sdZMZ_categories.js";
 export const zmzWebhookConfig = {
     color: 15258703,
     postRetryDelayMs: 10000,
-    mainPostDelayMs: 750,
+    mainPostDelayMs: 500,
 };
 
 // Min/Max possible wait times between requests (ms)
-export const minMsBetweenReqs = 15000;
+export const minMsBetweenReqs = 10000;
 export const maxMsBetweenReqs = 20000;
 
 // Max retries on a given request

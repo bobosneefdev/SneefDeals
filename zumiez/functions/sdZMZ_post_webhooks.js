@@ -29,10 +29,10 @@ export async function postWebhook(
         );
 
         while (true) {
-            await sd_utils.timeout(zmzWebhookConfig.postRetryDelayMs);
             const post = await axios.post(categoryData.webhookUrl, webhook);
             sdLogger(`Posted item in chat (${post.status})`);
             if (post.status >= 200 && post.status < 300) {
+                await sd_utils.timeout(zmzWebhookConfig.mainPostDelayMs);
                 break;
             }
             await sd_utils.timeout(zmzWebhookConfig.postRetryDelayMs);

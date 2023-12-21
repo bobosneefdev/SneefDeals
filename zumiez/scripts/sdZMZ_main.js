@@ -49,6 +49,7 @@ async function scrapeZMZ() {
                             itemData,
                             oldItemData
                         );
+
                         if (!firstRun) {
                             const howItChanged = hasItemChanged(
                                 oldItemData,

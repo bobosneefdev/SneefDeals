@@ -1,4 +1,5 @@
 import { zmzPromos } from "../objects/sdZMZ_promos.js";
+import { alertMeDiscord } from "../../common/functions/sd_alert_me.js";
 
 export function getPromoPrice(price, promoString) {
     for (const promo of zmzPromos) {
@@ -12,4 +13,6 @@ export function getPromoPrice(price, promoString) {
             return promo.ppu;
         }
     }
+    alertMeDiscord(`New promo string: ${promoString}`);
+    return null;
 }

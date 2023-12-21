@@ -38,31 +38,18 @@ function createFields(newItemData, oldItemData) {
 
 function createFieldOne(oldData, newData) {
     try {
-        const header = "REG PRICE";
+        const header = "BASE PRICE";
+        const wasStr = `Was: $${oldData.regPrice}`;
+        const nowStr = `Now: $${newData.regPrice}`;
 
-        let wasStr;
-        let nowStr;
-        let saveStr;
+        const saveDollars = (oldData.regPrice - newData.regPrice).toFixed(2);
+        const savePercent = (
+            (1 - newData.regPrice / oldData.regPrice) *
+            100
+        ).toFixed(1);
+        const saveStr = `Save: $${saveDollars} (${savePercent}%)`;
 
-        if (!oldData) {
-            wasStr = `Was: N/A`;
-            nowStr = `Now: $${newData.regPrice}`;
-            saveStr = `Save: N/A`;
-        } else {
-            wasStr = `Was: $${oldData.regPrice}`;
-            nowStr = `Now: $${newData.regPrice}`;
-
-            const saveDollars = (oldData.regPrice - newData.regPrice).toFixed(
-                2
-            );
-            const savePercent = (
-                (1 - newData.regPrice / oldData.regPrice) *
-                100
-            ).toFixed(1);
-            saveStr = `Save: $${saveDollars} (${savePercent}%)`;
-        }
         const body = `${wasStr}\n${nowStr}\n${saveStr}`;
-
         return new Field(header, body, true);
     } catch (error) {
         sdLogger(`createFieldOne: ${error}`);
@@ -74,11 +61,11 @@ function createFieldTwo(oldData, newData) {
     try {
         const header = "PROMO PRICE";
         let body = "Not on promo";
-        if (newData.regPrice != newData.promoPrice) {
+        if (newData.promoPrice) {
             let wasStr;
             let nowStr;
             let saveStr;
-            if (!oldData) {
+            if (!oldData.promoPrice) {
                 wasStr = `Was: N/A`;
                 nowStr = `Now: ~$${newData.promoPrice}`;
                 saveStr = `Save: N/A`;
@@ -95,7 +82,6 @@ function createFieldTwo(oldData, newData) {
                 ).toFixed(1);
                 saveStr = `Save: ~$${saveDollars} (${savePercent}%)`;
             }
-
             body = `${wasStr}\n${nowStr}\n${saveStr}`;
         }
 
@@ -111,7 +97,10 @@ function createFieldThree(newData) {
         const header = "HISTORY";
 
         const lowestReg = `Reg Low: $${newData.lowestReg.price}\n${newData.lowestReg.date}`;
-        const lowestPromo = `Promo Low: $${newData.lowestPromo.price}\n${newData.lowestPromo.date}`;
+        let lowestPromo = "Promo Low: N/A";
+        if (newData.lowestPromo) {
+            lowestPromo = `Promo Low: $${newData.lowestPromo.price}\n${newData.lowestPromo.date}`;
+        }
         const body = `${lowestReg}\n\n${lowestPromo}`;
 
         return new Field(header, body, true);

@@ -12,38 +12,36 @@ export function hasItemChanged(oldItem, newItem) {
             return false;
         }
 
-        // BRAND NEW ITEM
-        if (!oldItem && newItem) {
-            if (newItem.promoPrice && newItem.promoPrice < newItem.regPrice) {
-                return `PUT ON PROMO!`;
-            }
-            return `PUT ON SALE!`;
-        }
-
         // BASE PRICE LOWERED
         if (
             oldItem.regPrice > newItem.regPrice &&
-            newItem.regPrice < newItem.promoPrice
+            newItem.regPrice <= newItem.promoPrice
         ) {
-            return `STANDARD PRICE LOWERED!`;
+            return `STANDARD PRICE DROP!`;
         }
 
-        // ALREADY ON SALE ITEM PUT ON PROMO
+        // ITEM PUT ON PROMO
         if (
-            !oldItem.promoPrice &&
-            newItem.promoPrice &&
+            oldItem.promoPrice == null &&
+            newItem.promoPrice != null &&
             newItem.promoPrice < newItem.regPrice
         ) {
-            return `WAS ON SALE, NOW ALSO ON PROMO!`;
+            return `NOW ON PROMO!`;
         }
 
         // PRE-EXISTING PROMO PRICE LOWERED
         if (
+            oldItem.promoPrice != newItem.promoPrice &&
             oldItem.promoPrice > newItem.promoPrice &&
             newItem.promoPrice < newItem.regPrice
         ) {
-            return `PROMO PRICE LOWERED!`;
+            console.log(`OLD PROMO PRICE: ${oldItem.promoPrice}`);
+            console.log(`NEW PROMO PRICE: ${newItem.promoPrice}`);
+
+            return `PROMO PRICE DROP!`;
         }
+
+        return false;
     } catch (error) {
         sdLogger(`hasItemChanged: ${error}`);
         return false;
