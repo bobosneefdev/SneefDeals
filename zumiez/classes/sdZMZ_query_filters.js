@@ -1,6 +1,6 @@
-import * as filterRef from "../objects/sdZMZ_filters.js";
+import * as filterReference from "../constants/sdZMZ_filters.js";
 
-export class filtersCreator {
+export class ZumiezApiFilters {
     constructor(
         saleBool, // Boolean to show only "Sale" items
         brandsArr, // Array of strings EX: ["Nike", "Adidas", "Empyre"]
@@ -8,18 +8,19 @@ export class filtersCreator {
         priceRange, // Array with min & max usd values EX: [0, 100]
         bodyTypes // Array of strings EX: ["Men's", "Women's"]
     ) {
+        // Take our desired item query parameters, and format them into the Zumiez API's expected format
         const standardObject = (data) => {
             return { value: data };
         };
         if (brandsArr.length) {
-            this[filterRef.brands.paramName] = standardObject(brandsArr);
+            this[filterReference.brands.paramName] = standardObject(brandsArr);
         }
         if (colorsArr.length) {
-            this[filterRef.colors.paramName] = standardObject(colorsArr);
+            this[filterReference.colors.paramName] = standardObject(colorsArr);
         }
         if (saleBool) {
-            this[filterRef.sale.paramName] = standardObject([
-                filterRef.sale.true,
+            this[filterReference.sale.paramName] = standardObject([
+                filterReference.sale.true,
             ]);
         }
         if (priceRange.length) {
@@ -29,11 +30,11 @@ export class filtersCreator {
                     max: priceRange[1],
                 },
             ];
-            this[filterRef.priceRange.paramName] =
+            this[filterReference.priceRange.paramName] =
                 standardObject(priceRangeArr);
         }
         if (bodyTypes.length) {
-            this[filterRef.bodyTypes.paramName] = standardObject(bodyTypes);
+            this[filterReference.bodyTypes.paramName] = standardObject(bodyTypes);
         }
     }
 }

@@ -6,5 +6,5 @@ export function sdLogger(message, divider = null) {
     } else if (divider) {
         console.log(`${divider}`);
     }
-    console.log(`[${getTime()}] : ${message}`);
+    console.log(`[${getTime()}] ${message}`);
 }

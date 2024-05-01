@@ -1,21 +1,21 @@
 import { sdLogger } from "../../common/functions/sd_logger.js";
 import { fetchItems } from "../functions/sdZMZ_fetch_items.js";
 import * as sdUtils from "../../common/functions/sd_utility.js";
-import { optsCreator } from "../classes/sdZMZ_class_opts.js";
-import { filtersCreator } from "../classes/sdZMZ_class_filters.js";
-import { ZumiezItem } from "../classes/sdZMZ_class_item.js";
+import { ZumiezQueryParams } from "../classes/sdZMZ_query_params.js";
+import { ZumiezApiFilters } from "../classes/sdZMZ_query_filters.js";
+import { ZumiezItem } from "../classes/sdZMZ_item.js";
 import { readItemsJson } from "../functions/sdZMZ_read_items_json.js";
 import { writeItemsJson } from "../functions/sdZMZ_write_items_json.js";
 import { hasItemChanged } from "../functions/sdZMZ_has_item_changed.js";
-import * as settings from "../sdZMZ_user_settings.js";
+import * as settings from "../sdZMZ_config.js";
 import { postWebhook } from "../functions/sdZMZ_post_webhooks.js";
 
 async function scrapeZMZ() {
     try {
         while (true) {
             let firstRun = false;
-            const oldItems = await readItemsJson();
-            if (!Object.keys(oldItems).length) {
+            const oldItemDatas = await readItemsJson();
+            if (!Object.keys(oldItemDatas).length) {
                 firstRun = true;
             }
 
@@ -24,7 +24,7 @@ async function scrapeZMZ() {
                 let page = 1;
                 while (true) {
                     sdLogger(`BEGIN SCRAPE OF ${categoryData.uri}`, true);
-                    const reqFilters = new filtersCreator(
+                    const reqFilters = new ZumiezApiFilters(
                         settings.reqFilters.saleItems,
                         settings.reqFilters.brands,
                         settings.reqFilters.colors,
@@ -32,7 +32,7 @@ async function scrapeZMZ() {
                         settings.reqFilters.bodyTypes
                     );
 
-                    const reqOpts = new optsCreator(
+                    const reqOpts = new ZumiezQueryParams(
                         categoryData,
                         reqFilters,
                         page,
@@ -44,7 +44,7 @@ async function scrapeZMZ() {
                     }
 
                     for (const itemData of itemDatas) {
-                        const oldItemData = oldItems[itemData.id];
+                        const oldItemData = oldItemDatas[itemData.id];
                         const newItemData = new ZumiezItem(
                             itemData,
                             oldItemData

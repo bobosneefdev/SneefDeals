@@ -1,4 +1,4 @@
-import { categories } from "./objects/sdZMZ_categories.js";
+import { categories } from "./constants/sdZMZ_categories.js";
 
 export const zmzWebhookConfig = {
     color: 15258703,
@@ -7,8 +7,8 @@ export const zmzWebhookConfig = {
 };
 
 // Min/Max possible wait times between requests (ms)
-export const minMsBetweenReqs = 12000;
-export const maxMsBetweenReqs = 16000;
+export const minMsBetweenReqs = 15000;
+export const maxMsBetweenReqs = 20000;
 
 // Max retries on a given request
 export const maxRequestAttempts = 3;

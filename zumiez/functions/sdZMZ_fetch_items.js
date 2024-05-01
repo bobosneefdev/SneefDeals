@@ -1,7 +1,7 @@
 import axios from "axios";
 import { sdLogger } from "../../common/functions/sd_logger.js";
 import * as sdUtils from "../../common/functions/sd_utility.js";
-import * as settings from "../sdZMZ_user_settings.js";
+import * as settings from "../sdZMZ_config.js";
 
 export async function fetchItems(options) {
     if (!options.category) {

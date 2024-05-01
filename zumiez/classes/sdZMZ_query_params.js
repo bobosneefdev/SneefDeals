@@ -1,4 +1,4 @@
-export class optsCreator {
+export class ZumiezQueryParams {
     constructor(
         categoryObj, // Desired category obj (Found in the sdZMZ_categories.js file)
         filtersObj, // Desired filters (Created via the filtersCreator class)

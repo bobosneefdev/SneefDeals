@@ -1,4 +1,8 @@
 {
+  "name": "sneefdeals",
+  "version": "1.0.0",
+  "description": "The backend for the SneefDeals Discord server.",
+  "homepage": "https://github.com/bobosneefdev/SneefDeals",
   "type": "module",
   "dependencies": {
     "axios": "^1.6.2",

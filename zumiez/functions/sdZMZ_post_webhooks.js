@@ -1,9 +1,9 @@
 import axios from "axios";
-import { ZumiezEmbed } from "../classes/sdZMZ_class_embed.js";
+import { ZumiezEmbed } from "../classes/sdZMZ_embed.js";
 import { SneefWebhook } from "../../common/classes/sd_class_webhook.js";
 import * as sd_constants from "../../common/sd_constants.js";
 import * as sd_utils from "../../common/functions/sd_utility.js";
-import { zmzWebhookConfig } from "../sdZMZ_user_settings.js";
+import { zmzWebhookConfig } from "../sdZMZ_config.js";
 import { sdLogger } from "../../common/functions/sd_logger.js";
 
 export async function postWebhook(
@@ -13,13 +13,13 @@ export async function postWebhook(
     categoryData
 ) {
     try {
-        const embeds = [];
-        const embedOne = new ZumiezEmbed(
-            newItemData,
-            oldItemData,
-            howItChanged
-        );
-        embeds.push(embedOne);
+        const embeds = [
+            new ZumiezEmbed(
+                newItemData,
+                oldItemData,
+                howItChanged
+            )
+        ];
 
         const webhook = new SneefWebhook(
             "SneefDeals",

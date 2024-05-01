@@ -10,7 +10,7 @@ export function getTime() {
     });
 }
 
-export function getDate() {
+export function getDateString() {
     const now = new Date();
     return now.toLocaleDateString("en-US", {
         dateStyle: "medium",

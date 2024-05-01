@@ -1,58 +1,58 @@
 import { sdLogger } from "../../common/functions/sd_logger.js";
 
-export function hasItemChanged(oldData, newData) {
+export function hasItemChanged(oldItemData, newItemData) {
     try {
         // IF NO OLD ITEM
-        if (!oldData) {
+        if (!oldItemData) {
             return false;
         }
 
         // IF NO CHANGES
-        if (oldData == newData) {
+        if (oldItemData == newItemData) {
             return false;
         }
 
         // BASE PRICE LOWERED
         if (
-            oldData.regPrice > newData.regPrice &&
-            newData.regPrice <= newData.promoPrice
+            oldItemData.basePrice > newItemData.basePrice &&
+            newItemData.basePrice <= newItemData.promoPrice
         ) {
             const percentChange = (
-                (1 - newData.regPrice / oldData.regPrice) *
+                (1 - newItemData.basePrice / oldItemData.basePrice) *
                 100
             ).toFixed(0);
-            const dollarChange = (oldData.regPrice - newData.regPrice).toFixed(2);
-            return `**BASE PRICE DROPPED BY $${dollarChange}**\n$${oldData.regPrice} **->** $${newData.regPrice} (${percentChange}% DROP)`;
+            const dollarChange = (oldItemData.basePrice - newItemData.basePrice).toFixed(2);
+            return `**BASE PRICE DROPPED BY $${dollarChange}**\n$${oldItemData.basePrice} **->** $${newItemData.basePrice} (${percentChange}% DROP)`;
         }
 
         // ITEM PUT ON PROMO
         if (
-            oldData.promoPrice === null &&
-            newData.promoPrice !== null &&
-            newData.promoPrice < newData.regPrice
+            oldItemData.promoPrice === null &&
+            newItemData.promoPrice !== null &&
+            newItemData.promoPrice < newItemData.basePrice
         ) {
             const percentChange = (
-                (1 - newData.promoPrice / newData.regPrice) *
+                (1 - newItemData.promoPrice / newItemData.basePrice) *
                 100
             ).toFixed(0);
-            const dollarChange = (newData.regPrice - newData.promoPrice).toFixed(2);
-            return `**NOW ON PROMO, SAVE $${dollarChange}**\n$${newData.regPrice} **->** $${newData.promoPrice} (${percentChange}% OFF)`;
+            const dollarChange = (newItemData.basePrice - newItemData.promoPrice).toFixed(2);
+            return `**NOW ON PROMO, SAVE $${dollarChange}**\n$${newItemData.basePrice} **->** $${newItemData.promoPrice} (${percentChange}% OFF)`;
         }
 
         // PRE-EXISTING PROMO PRICE LOWERED
         if (
-            oldData.promoPrice !== null &&
-            newData.promoPrice !== null &&
-            oldData.promoPrice !== newData.promoPrice &&
-            oldData.promoPrice > newData.promoPrice &&
-            newData.promoPrice < newData.regPrice
+            oldItemData.promoPrice !== null &&
+            newItemData.promoPrice !== null &&
+            oldItemData.promoPrice !== newItemData.promoPrice &&
+            oldItemData.promoPrice > newItemData.promoPrice &&
+            newItemData.promoPrice < newItemData.basePrice
         ) {
             const percentChange = (
-                (1 - newData.promoPrice / oldData.promoPrice) *
+                (1 - newItemData.promoPrice / oldItemData.promoPrice) *
                 100
             ).toFixed(0);
-            const dollarChange = (oldData.promoPrice - newData.promoPrice).toFixed(2);
-            return `**PROMO PRICE DROPPED BY ${dollarChange}**\n$${oldData.promoPrice} **->** $${newData.promoPrice} (${percentChange}% DROP)`;
+            const dollarChange = (oldItemData.promoPrice - newItemData.promoPrice).toFixed(2);
+            return `**PROMO PRICE DROPPED BY ${dollarChange}**\n$${oldItemData.promoPrice} **->** $${newItemData.promoPrice} (${percentChange}% DROP)`;
         }
 
         return false;
