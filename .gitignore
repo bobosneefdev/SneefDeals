@@ -134,3 +134,4 @@ common/secrets/*
 
 #temp JSON storage
 zumiez/temp/*
+!zumiez/temp/.gitkeep

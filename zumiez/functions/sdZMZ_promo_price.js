@@ -4,7 +4,7 @@ import { alertMeDiscord } from "../../common/functions/sd_alert_me.js";
 export function getPromoPrice(price, promoString) {
     try {
         const zmzPromos = JSON.parse(
-            fs.readFileSync("../data/sdZMZ_promos.json")
+            fs.readFileSync("./zumiez/data/sdZMZ_promos.json")
         );
         for (const promo of zmzPromos) {
             if (promo.string != promoString) {
