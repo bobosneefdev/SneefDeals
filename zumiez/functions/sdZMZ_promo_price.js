@@ -25,6 +25,7 @@ export function getPromoPrice(price, promoString) {
             }
         );
         fs.writeFileSync("../data/sdZMZ_promos.json", JSON.stringify(zmzPromos, null, 4));
+        alertMeDiscord(`New promo found: ${promoString}`);
         return null;
     } catch (error) {
         console.log(`getPromoPrice: ${error}`);

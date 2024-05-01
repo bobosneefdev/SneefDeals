@@ -3,18 +3,18 @@ import { categories } from "./objects/sdZMZ_categories.js";
 export const zmzWebhookConfig = {
     color: 15258703,
     postRetryDelayMs: 10000,
-    mainPostDelayMs: 500,
+    mainPostDelayMs: 5000,
 };
 
 // Min/Max possible wait times between requests (ms)
-export const minMsBetweenReqs = 10000;
-export const maxMsBetweenReqs = 20000;
+export const minMsBetweenReqs = 12000;
+export const maxMsBetweenReqs = 16000;
 
 // Max retries on a given request
 export const maxRequestAttempts = 3;
 
 // File path to store the scraped item data.
-export const jsonFilePath = "./zumiez/data/sdZMZ_item_data.json";
+export const jsonFilePath = "./zumiez/temp/sdZMZ_item_data.json";
 
 export const reqFilters = {
     saleItems: false, // Only sale items?
