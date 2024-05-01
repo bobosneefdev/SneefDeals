@@ -53,9 +53,9 @@ function createEmbedFieldTwo(oldItemData, newItemData) {
             body += `**Save:** N/A`;
         } else if (newItemData.promoPrice) { // Promo price lowered
             body = `**Was:** ~$${oldItemData.promoPrice}\n`;
-            body = `**Now:** ~$${newItemData.promoPrice}\n`;
+            body += `**Now:** ~$${newItemData.promoPrice}\n`;
             const saveDollars = (oldItemData.promoPrice - newItemData.promoPrice).toFixed(2);
-            body = `**Save:** ~$${saveDollars}\n`;
+            body += `**Save:** ~$${saveDollars}\n`;
         }
 
         return new EmbedField(header, body, true);
