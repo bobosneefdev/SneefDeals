@@ -6,7 +6,7 @@ export async function writeItemsJson(data) {
     try {
         const dataString = JSON.stringify(data, null, 4);
         await fs.writeFile(jsonFilePath, dataString, "utf8");
-        sdLogger(`Successfully wrote items to JSON file.`, true);
+        sdLogger(`Saved items to JSON file.`, true);
         return true;
     } catch (error) {
         sdLogger(`writeItemsJson: ${error}`, true);

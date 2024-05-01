@@ -9,19 +9,14 @@ import { writeItemsJson } from "../functions/sdZMZ_write_items_json.js";
 import { hasItemChanged } from "../functions/sdZMZ_has_item_changed.js";
 import * as settings from "../sdZMZ_config.js";
 import { postWebhook } from "../functions/sdZMZ_post_webhooks.js";
+import { alertMeDiscord } from "../../common/functions/sd_alert_me.js";
 
 async function scrapeZMZ() {
     try {
         while (true) {
-            let firstRun = false;
-            const oldItemDatas = await readItemsJson();
-            if (!Object.keys(oldItemDatas).length) {
-                firstRun = true;
-            }
-
-            const newItems = {};
+            let itemDatas = await readItemsJson();
             for (const categoryData of settings.categoriesToScrape) {
-                let page = 1;
+                let fetchPageNumber = 1;
                 while (true) {
                     sdLogger(`BEGIN SCRAPE OF ${categoryData.uri}`, true);
                     const reqFilters = new ZumiezApiFilters(
@@ -32,55 +27,52 @@ async function scrapeZMZ() {
                         settings.reqFilters.bodyTypes
                     );
 
-                    const reqOpts = new ZumiezQueryParams(
+                    const reqParams = new ZumiezQueryParams(
                         categoryData,
                         reqFilters,
-                        page,
+                        fetchPageNumber,
                         settings.itemsPerReq
                     );
-                    const itemDatas = await fetchItems(reqOpts);
-                    if (!itemDatas.length) {
+                    const fetchedItemDatas = await fetchItems(reqParams);
+                    if (!fetchedItemDatas.length) {
+                        alertMeDiscord("**ZMZ Scrape:** No items length. Something wrong, check logs.");
                         break;
                     }
-
-                    for (const itemData of itemDatas) {
-                        const oldItemData = oldItemDatas[itemData.id];
+                    for (const fetchedItemData of fetchedItemDatas) {
+                        const oldItemData = itemDatas[fetchedItemData.id];
                         const newItemData = new ZumiezItem(
-                            itemData,
+                            fetchedItemData,
                             oldItemData
                         );
 
-                        if (!firstRun) {
-                            const howItChanged = hasItemChanged(
+                        const howItChanged = hasItemChanged(
+                            oldItemData,
+                            newItemData
+                        );
+                        if (howItChanged) {
+                            sdLogger(`${newItemData.name}\n${howItChanged}`);
+                            await postWebhook(
+                                newItemData,
                                 oldItemData,
-                                newItemData
+                                howItChanged,
+                                categoryData
                             );
-                            if (howItChanged) {
-                                sdLogger(
-                                    `${newItemData.name}: ${howItChanged}`
-                                );
-                                await postWebhook(
-                                    newItemData,
-                                    oldItemData,
-                                    howItChanged,
-                                    categoryData
-                                );
-                            }
                         }
-                        newItems[newItemData.id] = newItemData;
+
+                        itemDatas[fetchedItemData.id] = newItemData;
                     }
                     await sdUtils.randomTimeoutMs(
                         settings.minMsBetweenReqs,
                         settings.maxMsBetweenReqs
                     );
-                    if (itemDatas.length < settings.itemsPerReq) {
+                    if (fetchedItemDatas.length < settings.itemsPerReq) {
                         break;
                     }
-                    page++;
+                    fetchPageNumber++;
                 }
-                sdLogger(`END SCRAPE OF ${categoryData.uri}`, " ");
+                sdLogger(`FINISHED SCRAPE OF ${categoryData.uri}`, " ");
+                await writeItemsJson(itemDatas);
             }
-            await writeItemsJson(newItems);
         }
     } catch (error) {
         sdLogger(error);

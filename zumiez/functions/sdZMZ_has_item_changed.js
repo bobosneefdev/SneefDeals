@@ -52,7 +52,7 @@ export function hasItemChanged(oldItemData, newItemData) {
                 100
             ).toFixed(0);
             const dollarChange = (oldItemData.promoPrice - newItemData.promoPrice).toFixed(2);
-            return `**PROMO PRICE DROPPED BY ${dollarChange}**\n$${oldItemData.promoPrice} **->** $${newItemData.promoPrice} (${percentChange}% DROP)`;
+            return `**PROMO PRICE DROPPED BY $${dollarChange}**\n$${oldItemData.promoPrice} **->** $${newItemData.promoPrice} (${percentChange}% DROP)`;
         }
 
         return false;
