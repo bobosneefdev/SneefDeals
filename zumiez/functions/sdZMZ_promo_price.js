@@ -16,6 +16,7 @@ export function getPromoPrice(price, promoString) {
             if (promo.ppu) {
                 return +promo.ppu;
             }
+            return null;
         }
         zmzPromos.push(
             {
@@ -24,7 +25,7 @@ export function getPromoPrice(price, promoString) {
                 ppu: null,
             }
         );
-        fs.writeFileSync("../data/sdZMZ_promos.json", JSON.stringify(zmzPromos, null, 4));
+        fs.writeFileSync("./zumiez/data/sdZMZ_promos.json", JSON.stringify(zmzPromos, null, 4));
         alertMeDiscord(`New promo found: ${promoString}`);
         return null;
     } catch (error) {

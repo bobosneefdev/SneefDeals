@@ -88,5 +88,7 @@ export const categoriesToScrape = [
 ];
 
 // export const categoriesToScrape = [
-//     categories.other.accessories.watches
+//     categories.other.snow.womens,
+//     categories.other.snow.mens,
+//     categories.other.snow.snow,
 // ]
