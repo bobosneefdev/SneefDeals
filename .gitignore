@@ -131,6 +131,7 @@ dist
 
 # Shhhhhhhhh
 common/secrets/*
+!common/secrets/.gitkeep
 
 #temp JSON storage
 zumiez/temp/*
