@@ -1,8 +1,11 @@
-import { zmzPromos } from "../objects/sdZMZ_promos.js";
+import fs from "fs";
 import { alertMeDiscord } from "../../common/functions/sd_alert_me.js";
 
 export function getPromoPrice(price, promoString) {
     try {
+        const zmzPromos = JSON.parse(
+            fs.readFileSync("../data/sdZMZ_promos.json")
+        );
         for (const promo of zmzPromos) {
             if (promo.string != promoString) {
                 continue;
@@ -14,7 +17,14 @@ export function getPromoPrice(price, promoString) {
                 return +promo.ppu;
             }
         }
-        alertMeDiscord(`New promo string: ${promoString}`);
+        zmzPromos.push(
+            {
+                string: promoString,
+                ratio: null,
+                ppu: null,
+            }
+        );
+        fs.writeFileSync("../data/sdZMZ_promos.json", JSON.stringify(zmzPromos, null, 4));
         return null;
     } catch (error) {
         console.log(`getPromoPrice: ${error}`);
