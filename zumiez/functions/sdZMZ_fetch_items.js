@@ -19,11 +19,10 @@ export async function fetchItems(options) {
         return false;
     }
 
-    let attempts = 1;
     for (let i = 1; i <= settings.maxRequestAttempts; i++) {
         try {
             sdLogger(
-                `REQUEST ATTEMPT #${attempts} FOR PAGE ${options.page}`,
+                `REQUEST ATTEMPT #${i} FOR PAGE ${options.page}`,
                 " "
             );
             const response = await axios.post(reqUrl, payloadObj, headers);
@@ -32,23 +31,22 @@ export async function fetchItems(options) {
                 sdLogger(`${JSON.stringify(options.filters)}`);
             }
 
+            const itemDatas = response?.data?.content?.product?.value;
             if (
                 response.status != 200 ||
-                !response.data ||
-                !response.data.content ||
-                !response.data.content.product ||
-                !response.data.content.product.value ||
-                !Array.isArray(response.data.content.product.value)
+                !itemDatas ||
+                !Array.isArray(itemDatas)
             ) {
+                sdLogger(`fetchItems: Invalid response.`);
                 await sdUtils.randomTimeoutMs(180000, 240000);
-                attempts++;
                 continue;
             }
 
-            const itemDatas = response.data.content.product.value;
             if (!itemDatas.length) {
+                sdLogger(`fetchItems: No items found.`);
                 return [];
             }
+
             return itemDatas;
         } catch (error) {
             sdLogger(`fetchItems: ${error}`);
