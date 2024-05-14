@@ -1,4 +1,4 @@
-import { sdLogger } from "../../common/functions/sd_logger.js";
+import * as sdLogger from "../../common/functions/sd_logger.js";
 import { fetchItems } from "../functions/sdZMZ_fetch_items.js";
 import * as sdUtils from "../../common/functions/sd_utility.js";
 import { ZumiezQueryParams } from "../classes/sdZMZ_query_params.js";
@@ -18,7 +18,7 @@ async function scrapeZMZ() {
             for (const categoryData of settings.categoriesToScrape) {
                 let fetchPageNumber = 1;
                 while (true) {
-                    sdLogger(`BEGIN SCRAPE OF ${categoryData.uri}`, true);
+                    sdLogger.infoLog(`BEGIN SCRAPE OF ${categoryData.uri}`, true);
                     const reqFilters = new ZumiezApiFilters(
                         settings.reqFilters.saleItems,
                         settings.reqFilters.brands,
@@ -50,7 +50,7 @@ async function scrapeZMZ() {
                             newItemData
                         );
                         if (howItChanged) {
-                            sdLogger(`${newItemData.name}\n${howItChanged}`);
+                            sdLogger.infoLog(`${newItemData.name}\n${howItChanged}`);
                             await postWebhook(
                                 newItemData,
                                 oldItemData,
@@ -70,12 +70,12 @@ async function scrapeZMZ() {
                     }
                     fetchPageNumber++;
                 }
-                sdLogger(`FINISHED SCRAPE OF ${categoryData.uri}`, " ");
+                sdLogger.infoLog(`FINISHED SCRAPE OF ${categoryData.uri}`, " ");
                 await writeItemsJson(itemDatas);
             }
         }
     } catch (error) {
-        sdLogger(error);
+        sdLogger.errorLog(error, "scrapeZMZ");
         return false;
     }
 }

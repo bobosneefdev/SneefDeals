@@ -1,10 +1,10 @@
 import axios from "axios";
 import { ZumiezEmbed } from "../classes/sdZMZ_embed.js";
-import { SneefWebhook } from "../../common/classes/sd_class_webhook.js";
+import { DiscordWebhook } from "../../common/classes/sd_class_webhook.js";
 import * as sd_constants from "../../common/sd_constants.js";
 import * as sd_utils from "../../common/functions/sd_utility.js";
 import { zmzWebhookConfig } from "../sdZMZ_config.js";
-import { sdLogger } from "../../common/functions/sd_logger.js";
+import * as sdLogger from "../../common/functions/sd_logger.js";
 
 export async function postWebhook(
     newItemData,
@@ -21,7 +21,7 @@ export async function postWebhook(
             )
         ];
 
-        const webhook = new SneefWebhook(
+        const webhook = new DiscordWebhook(
             "SneefDeals",
             sd_constants.sdLogoUrl,
             null,
@@ -30,7 +30,7 @@ export async function postWebhook(
 
         while (true) {
             const post = await axios.post(categoryData.webhookUrl, webhook);
-            sdLogger(`Posted item in chat (${post.status})`);
+            sdLogger.infoLog(`Posted item in chat (${post.status})`);
             if (post.status >= 200 && post.status < 300) {
                 await sd_utils.timeout(zmzWebhookConfig.mainPostDelayMs);
                 break;
@@ -38,7 +38,7 @@ export async function postWebhook(
             await sd_utils.timeout(zmzWebhookConfig.postRetryDelayMs);
         }
     } catch (error) {
-        sdLogger(`postWebhook: ${error}`);
+        sdLogger.errorLog(error, "postWebhook");
         return false;
     }
 }

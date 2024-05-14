@@ -1,4 +1,4 @@
-import { sdLogger } from "./sd_logger.js";
+import * as sdLogger from "./sd_logger.js";
 
 export function getTime() {
     const now = new Date();
@@ -25,8 +25,8 @@ export async function timeout(ms) {
 
 export function randNumInRange(min, max) {
     if (min > max) {
-        sdLogger(`randNumInRange: min cannot be greater than max!`);
-        return false;
+        sdLogger.infoLog(`randNumInRange: min cannot be greater than max! Returning avg of min and max.`);
+        return (min + max) / 2;
     }
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }

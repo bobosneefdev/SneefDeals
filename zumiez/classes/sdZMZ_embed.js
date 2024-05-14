@@ -1,5 +1,6 @@
-import { sdLogger } from "../../common/functions/sd_logger.js";
+import * as sdLogger from "../../common/functions/sd_logger.js";
 import { zmzWebhookConfig } from "../sdZMZ_config.js";
+import { DiscordEmbedField } from "../../common/classes/sd_class_webhook.js";
 
 export class ZumiezEmbed {
     constructor(newItemData, oldItemData, howItChanged) {
@@ -16,14 +17,6 @@ export class ZumiezEmbed {
     }
 }
 
-class EmbedField {
-    constructor(title, content, inline) {
-        this.name = title;
-        this.value = content;
-        this.inline = inline || true;
-    }
-}
-
 function createEmbedFieldOne(oldItemData, newItemData) {
     try {
         const header = "BASE PRICE";
@@ -33,10 +26,10 @@ function createEmbedFieldOne(oldItemData, newItemData) {
         const saveDollars = (oldItemData.basePrice - newItemData.basePrice).toFixed(2);
         body += `**Save:** $${saveDollars}`;
 
-        return new EmbedField(header, body, true);
+        return new DiscordEmbedField(header, body, true);
     } catch (error) {
-        sdLogger(`createFieldOne: ${error}`);
-        return new EmbedField("BASE PRICE", "***ERROR***", true);
+        sdLogger.errorLog(error, "createEmbedFieldOne");
+        return new DiscordEmbedField("BASE PRICE", "***ERROR***", true);
     }
 }
 
@@ -58,10 +51,10 @@ function createEmbedFieldTwo(oldItemData, newItemData) {
             body += `**Save:** ~$${saveDollars}\n`;
         }
 
-        return new EmbedField(header, body, true);
+        return new DiscordEmbedField(header, body, true);
     } catch (error) {
-        sdLogger(`createFieldTwo: ${error}`);
-        return new EmbedField("PROMO PRICE", "***ERROR***", true);
+        sdLogger.errorLog(error, "createEmbedFieldTwo");
+        return new DiscordEmbedField("PROMO PRICE", "***ERROR***", true);
     }
 }
 
@@ -76,9 +69,9 @@ function createEmbedFieldThree(newItemData) {
             body += `**Promo Low:** N/A`;
         }
 
-        return new EmbedField(header, body, true);
+        return new DiscordEmbedField(header, body, true);
     } catch (error) {
-        sdLogger(`createFieldTwo: ${error}`);
-        return new EmbedField("HISTORY", "***ERROR***", true);
+        sdLogger.errorLog(error, "createEmbedFieldThree");
+        return new DiscordEmbedField("HISTORY", "***ERROR***", true);
     }
 }

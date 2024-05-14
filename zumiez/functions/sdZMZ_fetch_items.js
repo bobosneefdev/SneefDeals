@@ -1,16 +1,16 @@
 import axios from "axios";
-import { sdLogger } from "../../common/functions/sd_logger.js";
+import * as sdLogger from "../../common/functions/sd_logger.js";
 import * as sdUtils from "../../common/functions/sd_utility.js";
 import * as settings from "../sdZMZ_config.js";
 
 export async function fetchItems(options) {
     if (!options.category) {
-        sdLogger(`fetchItems: Please provide a category.`);
+        sdLogger.infoLog(`fetchItems: Please provide a category.`);
         return false;
     }
 
     if (!options.filters) {
-        sdLogger(`fetchItems: Please provide a filter.`);
+        sdLogger.infoLog(`fetchItems: Please provide a filter.`);
         return false;
     }
 
@@ -21,14 +21,14 @@ export async function fetchItems(options) {
 
     for (let i = 1; i <= settings.maxRequestAttempts; i++) {
         try {
-            sdLogger(
+            sdLogger.infoLog(
                 `REQUEST ATTEMPT #${i} FOR PAGE ${options.page}`,
                 " "
             );
             const response = await axios.post(reqUrl, payloadObj, headers);
             if (payloadObj.data.filter) {
-                sdLogger(`Request Filters:`);
-                sdLogger(`${JSON.stringify(options.filters)}`);
+                sdLogger.infoLog(`Request Filters:`);
+                sdLogger.infoLog(`${JSON.stringify(options.filters)}`);
             }
 
             const itemDatas = response?.data?.content?.product?.value;
@@ -37,19 +37,19 @@ export async function fetchItems(options) {
                 !itemDatas ||
                 !Array.isArray(itemDatas)
             ) {
-                sdLogger(`fetchItems: Invalid response.`);
+                sdLogger.infoLog(`fetchItems: Invalid response.`);
                 await sdUtils.randomTimeoutMs(180000, 240000);
                 continue;
             }
 
             if (!itemDatas.length) {
-                sdLogger(`fetchItems: No items found.`);
+                sdLogger.infoLog(`fetchItems: No items found.`);
                 return [];
             }
 
             return itemDatas;
         } catch (error) {
-            sdLogger(`fetchItems: ${error}`);
+            sdLogger.errorLog(error, "fetchItems");
             await sdUtils.randomTimeoutMs(90000, 120000);
         }
     }
@@ -147,7 +147,7 @@ function getPayload(options) {
 
         return payloadObj;
     } catch (error) {
-        sdLogger(`getData: ${error}`);
+        sdLogger.errorLog(error, "getPayload");
         return false;
     }
 }

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { webhookUrls } from "../secrets/sd_webhookLinks.js";
-import { sdLogger } from "./sd_logger.js";
+import * as sdLogger from "./sd_logger.js";
 
 export async function alertMeDiscord(messageStr) {
     try {
-        sdLogger(messageStr);
+        sdLogger.infoLog(`Posting in Discord: ${messageStr}`, true);
         await axios.post(
             webhookUrls.utility.alerts,
             {
@@ -18,7 +18,7 @@ export async function alertMeDiscord(messageStr) {
         );
         return true;
     } catch (error) {
-        console.log(`alertMeDiscord: ${error}`);
+        sdLogger.errorLog(error, "alertMeDiscord");
         return false;
     }
 }

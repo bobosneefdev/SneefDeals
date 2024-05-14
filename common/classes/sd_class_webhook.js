@@ -1,4 +1,4 @@
-export class SneefWebhook {
+export class DiscordWebhook {
     constructor(
         botNameStr, // Username of the discord bot
         botAvatarUrlStr, // URL of desired image for the discord bot's pfp
@@ -17,5 +17,13 @@ export class SneefWebhook {
         if (embedsArr) {
             this.embeds = embedsArr;
         }
+    }
+}
+
+export class DiscordEmbedField {
+    constructor(title, content, inline) {
+        this.name = title;
+        this.value = content;
+        this.inline = inline || true;
     }
 }

@@ -1,6 +1,6 @@
 import { getPromoPrice } from "../functions/sdZMZ_promo_price.js";
 import * as sdUtils from "../../common/functions/sd_utility.js";
-import { sdLogger } from "../../common/functions/sd_logger.js";
+import * as sdLogger from "../../common/functions/sd_logger.js";
 
 export class ZumiezItem {
     constructor(newItemData, oldItemData) {
@@ -42,7 +42,7 @@ function getLowestPromoPrice(oldItemData, newItemData) {
             return null;
         }
     } catch (error) {
-        sdLogger(`getLowestPromoPrice: ${error}`);
+        sdLogger.errorLog(error, "getLowestPromoPrice");
         return null;
     }
 }
@@ -63,7 +63,7 @@ function getLowestBasePrice(oldItemData, newItemData) {
             };
         }
     } catch (error) {
-        sdLogger(`getlowestBasePrice: ${error}`);
+        sdLogger.errorLog(error, "getLowestBasePrice");
         return null;
     }
 }
