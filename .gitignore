@@ -130,9 +130,9 @@ dist
 .pnp.*
 
 # Shhhhhhhhh
-common/secrets/*
-!common/secrets/.gitkeep
+src/common/secrets/*
+!src/common/secrets/webhook_links_example.js
 
 # Temp JSON storage
-zumiez/temp/*
-!zumiez/temp/.gitkeep
+src/zumiez/temp/*
+!src/zumiez/temp/.gitkeep

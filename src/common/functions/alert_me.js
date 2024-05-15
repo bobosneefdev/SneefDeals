@@ -1,6 +1,6 @@
 import axios from "axios";
-import { webhookUrls } from "../secrets/sd_webhookLinks.js";
-import * as sdLogger from "./sd_logger.js";
+import { webhookUrls } from "../secrets/webhook_links.js";
+import * as sdLogger from "./logger.js";
 
 export async function alertMeDiscord(messageStr) {
     try {

@@ -1,13 +1,8 @@
-import * as sdLogger from "./sd_logger.js";
+import * as sdLogger from "./logger.js";
 
-export function getTime() {
+export function getTimestamp() {
     const now = new Date();
-    return now.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-    });
+    return now.toUTCString();
 }
 
 export function getDateString() {

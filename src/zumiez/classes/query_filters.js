@@ -1,4 +1,4 @@
-import * as filterReference from "../constants/sdZMZ_filters.js";
+import * as filterReference from "../constants/filters.js";
 
 export class ZumiezApiFilters {
     constructor(

@@ -1,4 +1,4 @@
-import * as sdLogger from "../../common/functions/sd_logger.js";
+import * as sdLogger from "../../common/functions/logger.js";
 
 export function hasItemChanged(oldItemData, newItemData) {
     try {

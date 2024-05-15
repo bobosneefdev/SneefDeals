@@ -1,5 +1,5 @@
-import * as filterRef from "./sdZMZ_filters.js";
-import { webhookUrls } from "../../common/secrets/sd_webhookLinks.js";
+import * as filterRef from "./filters.js";
+import { webhookUrls } from "../../common/secrets/webhook_links.js";
 
 export const categories = {
     mens: {

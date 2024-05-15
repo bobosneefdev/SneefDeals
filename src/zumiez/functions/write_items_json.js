@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
-import * as sdLogger from "../../common/functions/sd_logger.js";
-import { jsonFilePath } from "../sdZMZ_config.js";
+import * as sdLogger from "../../common/functions/logger.js";
+import { jsonFilePath } from "../config.js";
 
 export async function writeItemsJson(data) {
     try {

@@ -1,15 +1,15 @@
-import { getTime } from "./sd_utility.js";
+import { getTimestamp } from "./utility.js";
 
 export function infoLog(message, divider = false, timeStamp = true) {
     if (divider == true) {
-        console.log(`////////////////////////////////////////////////////`);
+        console.log(``);
     } else if (divider !== false) {
         console.log(`${divider}`);
     }
 
     let str = '';
     if (timeStamp) {
-        str += `[${getTime()}] `;
+        str += `[${getTimestamp()}] `;
     }
     str += message;
 
@@ -17,7 +17,8 @@ export function infoLog(message, divider = false, timeStamp = true) {
 }
 
 export function errorLog(error, functionName = "Error") {
-    console.log(`/-/-/-/-/-/-/-/-/-/${functionName} : ${getTime()}/-/-/-/-/-/-/-/-/-/`);
+    console.log('');
+    infoLog(`${functionName}`);
     console.error(error);
-    console.log(`/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/`);
+    console.log('');
 }

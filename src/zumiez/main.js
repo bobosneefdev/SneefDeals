@@ -1,24 +1,26 @@
-import * as sdLogger from "../../common/functions/sd_logger.js";
-import { fetchItems } from "../functions/sdZMZ_fetch_items.js";
-import * as sdUtils from "../../common/functions/sd_utility.js";
-import { ZumiezQueryParams } from "../classes/sdZMZ_query_params.js";
-import { ZumiezApiFilters } from "../classes/sdZMZ_query_filters.js";
-import { ZumiezItem } from "../classes/sdZMZ_item.js";
-import { readItemsJson } from "../functions/sdZMZ_read_items_json.js";
-import { writeItemsJson } from "../functions/sdZMZ_write_items_json.js";
-import { hasItemChanged } from "../functions/sdZMZ_has_item_changed.js";
-import * as settings from "../sdZMZ_config.js";
-import { postWebhook } from "../functions/sdZMZ_post_webhooks.js";
-import { alertMeDiscord } from "../../common/functions/sd_alert_me.js";
+import * as sdLogger from "../common/functions/logger.js";
+import { fetchItems } from "./functions/fetch_items.js";
+import * as sdUtils from "../common/functions/utility.js";
+import { ZumiezQueryParams } from "./classes/query_params.js";
+import { ZumiezApiFilters } from "./classes/query_filters.js";
+import { ZumiezItem } from "./classes/item.js";
+import { readItemsJson } from "./functions/read_items_json.js";
+import { writeItemsJson } from "./functions/write_items_json.js";
+import { hasItemChanged } from "./functions/has_item_changed.js";
+import * as settings from "./config.js";
+import { postWebhook } from "../common/functions/send_webhook.js";
+import { DiscordWebhook } from "../common/classes/discord_webhook.js";
+import { createZumiezEmbed } from "./classes/embed.js";
 
 async function scrapeZMZ() {
     try {
         while (true) {
             let itemDatas = await readItemsJson();
             for (const categoryData of settings.categoriesToScrape) {
+                sdLogger.infoLog(`SCRAPING ${categoryData.uri}`, true);
+
                 let fetchPageNumber = 1;
                 while (true) {
-                    sdLogger.infoLog(`BEGIN SCRAPE OF ${categoryData.uri}`, true);
                     const reqFilters = new ZumiezApiFilters(
                         settings.reqFilters.saleItems,
                         settings.reqFilters.brands,
@@ -35,7 +37,6 @@ async function scrapeZMZ() {
                     );
                     const fetchedItemDatas = await fetchItems(reqParams);
                     if (!fetchedItemDatas.length) {
-                        alertMeDiscord("**ZMZ Scrape:** No items length. Something wrong, check logs.");
                         break;
                     }
                     for (const fetchedItemData of fetchedItemDatas) {
@@ -50,13 +51,18 @@ async function scrapeZMZ() {
                             newItemData
                         );
                         if (howItChanged) {
-                            sdLogger.infoLog(`${newItemData.name}\n${howItChanged}`);
-                            await postWebhook(
-                                newItemData,
-                                oldItemData,
-                                howItChanged,
-                                categoryData
+                            sdLogger.infoLog(`${newItemData.name}\n${howItChanged}`, true);
+                            const webhook = new DiscordWebhook(
+                                null,
+                                [
+                                    createZumiezEmbed(
+                                        newItemData,
+                                        oldItemData,
+                                        howItChanged
+                                    )
+                                ]
                             );
+                            await postWebhook(webhook, categoryData.webhookUrl);
                         }
 
                         itemDatas[fetchedItemData.id] = newItemData;

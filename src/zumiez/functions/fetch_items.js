@@ -1,7 +1,7 @@
 import axios from "axios";
-import * as sdLogger from "../../common/functions/sd_logger.js";
-import * as sdUtils from "../../common/functions/sd_utility.js";
-import * as settings from "../sdZMZ_config.js";
+import * as sdLogger from "../../common/functions/logger.js";
+import * as sdUtils from "../../common/functions/utility.js";
+import * as settings from "../config.js";
 
 export async function fetchItems(options) {
     if (!options.category) {
@@ -19,12 +19,13 @@ export async function fetchItems(options) {
         return false;
     }
 
-    for (let i = 1; i <= settings.maxRequestAttempts; i++) {
+    for (let i = 0; i < settings.maxRequestAttempts; i++) {
         try {
-            sdLogger.infoLog(
-                `REQUEST ATTEMPT #${i} FOR PAGE ${options.page}`,
-                " "
-            );
+            let logStr = `REQUESTING PAGE #${options.page}`;
+            if (i) {
+                logStr += ` (ATTEMPT ${i + 1})`;
+            }
+            sdLogger.infoLog(logStr);
             const response = await axios.post(reqUrl, payloadObj, headers);
             if (payloadObj.data.filter) {
                 sdLogger.infoLog(`Request Filters:`);

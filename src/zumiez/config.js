@@ -1,9 +1,11 @@
-import { categories } from "./constants/sdZMZ_categories.js";
+import { categories } from "./constants/categories.js";
 
 export const zmzWebhookConfig = {
-    color: 15258703,
+    color: 0,
     postRetryDelayMs: 10000,
     mainPostDelayMs: 5000,
+    zumiezLogoUrl: "https://cdn.discordapp.com/attachments/1186285266479100004/1240084753374384148/f6g0b202DZlYy8MOjjaF5Xu-QZClFxLhYpvAiRZ-NQvPVbgWhqx3b777nzBbH_lq5Zc.png?ex=6645466c&is=6643f4ec&hm=be39b73068535f26c0a4ff06c99e5366b0c169c6948691d0e0b665c43cfa2d52&",
+    zumiezUrl: "https://www.zumiez.com/",
 };
 
 // Min/Max possible wait times between requests (ms)
@@ -14,7 +16,7 @@ export const maxMsBetweenReqs = 20000;
 export const maxRequestAttempts = 3;
 
 // File path to store the scraped item data.
-export const jsonFilePath = "./zumiez/temp/sdZMZ_item_data.json";
+export const jsonFilePath = "./src/zumiez/temp/item_data.json";
 
 export const reqFilters = {
     saleItems: false, // Only sale items?
@@ -86,9 +88,3 @@ export const categoriesToScrape = [
     categories.other.accessories.bags,
     categories.other.accessories.wallets,
 ];
-
-// export const categoriesToScrape = [
-//     categories.other.snow.womens,
-//     categories.other.snow.mens,
-//     categories.other.snow.snow,
-// ]

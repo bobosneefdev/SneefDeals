@@ -2,36 +2,36 @@
     {
         "string": "2 for $40",
         "ratio": false,
-        "ppu": 20
+        "unit_price": 20
     },
     {
         "string": "2 for $30",
         "ratio": false,
-        "ppu": 15
+        "unit_price": 15
     },
     {
         "string": "Buy 1 Get 1 50% Off",
         "ratio": 0.75,
-        "ppu": false
+        "unit_price": false
     },
     {
         "string": "Buy 1 Get 1 Free",
         "ratio": 0.5,
-        "ppu": false
+        "unit_price": false
     },
     {
         "string": "Take an Additional 25% Off",
         "ratio": 0.75,
-        "ppu": false
+        "unit_price": false
     },
     {
         "string": "Take an Additional 50% Off",
         "ratio": 0.5,
-        "ppu": false
+        "unit_price": false
     },
     {
         "string": "3 for $12",
         "ratio": false,
-        "ppu": 4
+        "unit_price": 4
     }
 ]
