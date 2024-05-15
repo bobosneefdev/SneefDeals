@@ -95,7 +95,7 @@ function createEmbedFieldThree(newItemData) {
             body += `**Base High:** $${newItemData.highestBase.price}\n*${newItemData.highestBase.date}*\n\n`;
         }
 
-        if (newItemData.lowestPromo >= newItemData.promoPrice) {
+        if (newItemData.lowestPromo.price >= newItemData.promoPrice) {
             body += `**Promo Low:** Now\n\n`;
         } else if (
             newItemData.lowestPromo.price &&
