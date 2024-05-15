@@ -79,8 +79,8 @@ function createEmbedFieldThree(newItemData) {
 
         let body = ''
         
-        if (newItemData.lowestBase.price === newItemData.basePrice) {
-            body += `**Base Low:** Now\n\n`;
+        if (newItemData.lowestBase.price >= newItemData.basePrice) {
+            body += `**Base Low:** Now\n`;
         } else if (
             newItemData.lowestBase.price &&
             newItemData.lowestBase.price < newItemData.basePrice
@@ -88,16 +88,14 @@ function createEmbedFieldThree(newItemData) {
             body += `**Base Low:** $${newItemData.lowestBase.price}\n*${newItemData.lowestBase.date}*\n\n`;
         }
 
-        if (newItemData.highestBase.price === newItemData.basePrice) {
-            body += `**Base High:** Now\n\n`;
-        } else if (
+        if (
             newItemData.highestBase.price &&
             newItemData.highestBase.price > newItemData.basePrice
         ) {
             body += `**Base High:** $${newItemData.highestBase.price}\n*${newItemData.highestBase.date}*\n\n`;
         }
 
-        if (newItemData.lowestPromo === newItemData.promoPrice) {
+        if (newItemData.lowestPromo >= newItemData.promoPrice) {
             body += `**Promo Low:** Now\n\n`;
         } else if (
             newItemData.lowestPromo.price &&
@@ -106,9 +104,7 @@ function createEmbedFieldThree(newItemData) {
             body += `**Promo Low:** $${newItemData.lowestPromo.price}\n*${newItemData.lowestPromo.date}*\n\n`;
         }
 
-        if (newItemData.highestPromo === newItemData.promoPrice) {
-            body += `**Promo High:** Now\n\n`;
-        } else if (
+        if (
             newItemData.highestPromo.price &&
             newItemData.highestPromo.price > newItemData.promoPrice
         ) {
