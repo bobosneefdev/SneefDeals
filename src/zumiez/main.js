@@ -76,7 +76,7 @@ async function scrapeZMZ() {
                     }
                     fetchPageNumber++;
                 }
-                sdLogger.infoLog(`FINISHED SCRAPE OF ${categoryData.uri}`, " ");
+                sdLogger.infoLog(`FINISHED SCRAPE OF ${categoryData.uri}`);
                 await writeItemsJson(itemDatas);
             }
         }
