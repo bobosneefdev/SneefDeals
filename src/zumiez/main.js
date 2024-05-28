@@ -36,7 +36,7 @@ async function scrapeZMZ() {
                         settings.itemsPerReq
                     );
                     const fetchedItemDatas = await fetchItems(reqParams);
-                    if (!fetchedItemDatas.length) {
+                    if (!fetchedItemDatas?.length) {
                         break;
                     }
                     for (const fetchedItemData of fetchedItemDatas) {
